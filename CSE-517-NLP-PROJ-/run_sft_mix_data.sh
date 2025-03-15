@@ -1,0 +1,21 @@
+deepspeed --module openrlhf.cli.train_sft \
+   --max_len 2048 \
+   --dataset json@../data/sft \
+   --input_key input \
+   --output_key output \
+   --train_batch_size 32 \
+   --micro_train_batch_size 4 \
+   --max_samples 10000 \
+   --pretrain /home/NETID/zengsh/course/src/checkpoint/llama3-1b-cpo-1epoch-mix_data-refine \
+   --save_path ./checkpoint/llama3-1b-sft_mix_data_cpo_sft \
+   --save_steps -1 \
+   --logging_steps 1 \
+   --eval_steps -1 \
+   --zero_stage 3 \
+   --max_epochs 2 \
+   --packing_samples \
+   --bf16 \
+   --flash_attn \
+   --learning_rate 5e-6 \
+   --gradient_checkpointing \
+   --apply_chat_template
