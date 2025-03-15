@@ -1,0 +1,20 @@
+deepspeed --module openrlhf.cli.train_sft \
+   --max_len 512 \
+   --dataset json@../data/SVAMP/train \
+   --input_key input \
+   --output_key output \
+   --train_batch_size 64 \
+   --micro_train_batch_size 8 \
+   --max_samples 10000 \
+   --pretrain meta-llama/Llama-3.2-1B-Instruct \
+   --save_path ./checkpoint/llama3-1b-sft \
+   --save_steps -1 \
+   --logging_steps 1 \
+   --eval_steps -1 \
+   --zero_stage 2 \
+   --max_epochs 2 \
+   --packing_samples \
+   --bf16 \
+   --flash_attn \
+   --learning_rate 6e-6 \
+   --gradient_checkpointing
